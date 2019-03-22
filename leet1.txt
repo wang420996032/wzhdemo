@@ -1,0 +1,48 @@
+栈的基础作用 括号匹配
+class Solution{
+    public:
+bool isValid(string s)
+{stack <char> V;
+int i=0;
+ int j=s.size()-1;
+ char p;
+ while(i<=j)
+ {switch(s[i])
+ {case '(':
+  case '[':
+  case '{':V.push(s[i]);
+           i++;
+           break;
+  case ')': if(V.empty())
+      return false;
+  else p=V.top();
+          V.pop();
+          if(p!='(')
+         return false;
+          else {i++;
+           break;}
+  case ']':
+   if(V.empty())
+      return false;
+  else p=V.top();
+          V.pop();
+          if(p!='[')
+          return false;
+          else {i++;
+  break;}
+  case '}':
+   if(V.empty())
+      return false;
+  else p=V.top();
+          V.pop();
+          if(p!='{')
+         return false;
+          else {i++;
+                break;}
+ }   
+ }if(V.empty())
+     return true;
+ else return false;
+ 
+}
+};
