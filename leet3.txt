@@ -1,0 +1,74 @@
+循环队列用数组实现
+class MyCircularQueue {
+    private: vector <int> v;
+    int size;
+    int head;
+    int tail;
+    bool tag;//tag为标记位，head，tail分别代表循环队列的头，尾指针
+public:
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    MyCircularQueue(int k) {
+        size=k;
+        head=0;
+        tail=0;
+        tag=0;
+        v = vector<int> (k);
+    }
+    
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    bool enQueue(int value) {
+        if(isFull()) return false;//表示队满
+        v[tail]=value;
+        tail=(tail+1)%size;
+        tag=1;
+        return true;
+    }
+    
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    bool deQueue() {
+        if(isEmpty()) return false;//表示队空
+        head=(head+1)%size;
+        tag=0;
+        return true;
+    }
+    
+    /** Get the front item from the queue. */
+   int Front() {
+      if(isEmpty()) return -1;
+        
+        return v[head];
+    }
+    
+    /** Get the last item from the queue. */
+    int Rear() {
+        int x;
+        if(isEmpty()) return -1;
+        if(tail==0)
+            x=v[size-1];
+        else x=v[tail-1];
+        return x;
+    }
+    
+    /** Checks whether the circular queue is empty or not. */
+    bool isEmpty() {
+        if((head==tail)&&!tag) return true;
+        else return false;
+    }
+    
+    /** Checks whether the circular queue is full or not. */
+    bool isFull() {
+        if((tail==head)&&tag) return true;
+        else return false;
+    }
+};
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue* obj = new MyCircularQueue(k);
+ * bool param_1 = obj->enQueue(value);
+ * bool param_2 = obj->deQueue();
+ * int param_3 = obj->Front();
+ * int param_4 = obj->Rear();
+ * bool param_5 = obj->isEmpty();
+ * bool param_6 = obj->isFull();
+ */
