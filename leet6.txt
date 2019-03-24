@@ -1,0 +1,56 @@
+十进制数转化为罗马字符串
+class Solution {
+public:
+    string intToRoman(int num) {
+        string s="";
+        int g=num%10;
+        int t=(num-g)/10%10;
+        int b=(num-g-t*10)/100%10;
+        int q=num/1000;//get the num's every digit
+        while(q--)
+            s=s+'M';
+        if(b>=0&&b<=3)
+        while(b--)
+            s=s+'C';
+        else if(b==4)
+            s=s+'C'+'D';
+        else if(b>=5&&b<=8)
+        {s=s+'D';
+            while(b-5!=0)
+        {b--;
+        s=s+'C';}
+        }
+        else if(b==9)
+            s=s+'C'+'M';
+        //  
+         if(t>=0&&t<=3)
+        while(t--)
+            s=s+'X';
+        else if(t==4)
+            s=s+'X'+'L';
+        else if(t>=5&&t<=8)
+        {s=s+'L';
+            while(t-5!=0)
+        {t--;
+        s=s+'X';}
+        }
+        else if(t==9)
+            s=s+'X'+'C';  
+           //
+          if(g>=0&&g<=3)
+        while(g--)
+            s=s+'I';
+        else if(g==4)
+            s=s+'I'+'V';
+        else if(g>=5&&g<=8)
+        {s=s+'V';
+            while(g-5!=0)
+        {g--;
+        s=s+'I';}
+        }
+        else if(g==9)
+            s=s+'I'+'X';
+            return s;
+            
+    }
+};
