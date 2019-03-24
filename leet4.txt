@@ -1,0 +1,29 @@
+给定数和在数组中的位置
+class Solution {
+public:
+    int FindPos(vector<int> &v,int x,int begin)//find the x's position in the vector except the begin
+    {int i;
+        for(i=0;i<v.size();i++)
+     if(v[i]==x&&i!=begin)
+         break; 
+     return i ;
+    }
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> res(2);
+        int len=nums.size();
+        vector<int> tab(len);//tab is the copy of input array
+        for(int temp=0;temp<nums.size();temp++)
+            tab[temp]=nums[temp];
+        sort(nums.begin(),nums.end());
+        int k=0;
+        int j=nums.size()-1;
+        while(nums[k]+nums[j]!=target)
+        {if(nums[k]+nums[j]>target)
+            j-=1;
+         else
+             k+=1; }
+        res[0]=FindPos(tab,nums[k],-1);
+        res[1]=FindPos(tab,nums[j],res[0]);
+        return res;
+    }
+};
